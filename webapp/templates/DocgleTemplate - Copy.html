@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>SAP DocGle</title>
+		<style>
+			@import url(http://fonts.googleapis.com/css?family=Amatic+SC:700);
+			body{
+			    text-align: center;    
+			}
+			h1{
+			    font-family: 'Amatic SC', cursive;
+			    font-weight: normal;
+			    color: #8ac640;
+			    font-size: 7.5em;
+			}
+			#txtsearch
+			{
+			    height:40px;
+			    font-size:14pt;
+			}
+		</style>        
+       <link rel="stylesheet" media="screen" href ="static/bootstrap.min.css">
+       <link rel="stylesheet" href="static/bootstrap-theme.min.css">
+       <meta name="viewport" content = "width=device-width, initial-scale=1.0">
+ 
+    </head>
+    <body>
+ 
+ 
+<div class="container">
+ 
+ 
+  <h1>Our own Google</h1>
+  <form  action="" method="post" role="form">
+    {{ form.csrf }}
+    <div class="form-group">
+      <input type="text" class="form-control" id="txtsearch" name="txtsearch" size="100" placeholder="Search SAP DocGle">
+      <br></br>
+    </div>
+    <div class="form-group">
+	    <button id="wiki" name="wiki" type="submit" value="wiki_clicked" class="btn btn-success" size="50" style="font-size : 14px; width: 10%; height: 25px;" title="Get Wiki Link details">Wiki Links</button>
+	    <button id="ngpbug" name="ngpbug" type="submit" value="ngpbug_clicked" class="btn btn-success" size="50" style="font-size : 14px; width: 10%; height: 25px;" title="Get NGPBug details">NGPBug Tracker</button> 
+		<button id="bcp" name="bcp" type="submit" value="bcp_clicked" class="btn btn-success" size="50" style="font-size : 14px; width: 10%; height: 25px;" title="Get BCP Incident details (upcoming...)" disabled>BCP Incidents</button> 
+    </div>
+  </form>
+ 
+  <br>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+        {% for message in messages %}
+			{% if "Error" not in message[1]: %}
+                <div class="alert alert-info">
+               {{ message[1] }}
+                </div>
+            {% endif %}
+                    
+            {% if "Error" in message[1]: %}
+                <div class="alert alert-warning">
+					<font face="verdana" size="4" color="red">{{ message[1] }}</font>
+                </div>
+            {% endif %}
+        {% endfor %}
+            {% endif %}
+        {% endwith %}
+ 
+</div>
+<br>      
+</div>
+</div>
+</body>
+</html>

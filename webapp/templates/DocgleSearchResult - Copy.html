@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+	<head>
+		<style>
+			body {
+    			padding-top: 2%;    
+			}
+			
+			.padleft {
+			    padding-left: 15%;
+			}
+					
+			.text {
+				  position: relative;
+				  color: black;
+				  width: 1000px; /* Could be anything you like. */
+			}
+			
+			.text-concat {
+				  position: relative;
+				  display: inline-block;
+				  word-wrap: break-word;
+				  overflow: hidden;
+				  max-height: 3.6em; /* (Number of lines you want visible) * (line-height) */
+				  line-height: 1.2em;
+				  text-align:justify;
+			}
+			
+			.text.ellipsis::after {
+				  content: "...";
+				  position: absolute;
+				  right: -12px; 
+				  bottom: 4px;
+			}
+		</style>
+	</head>
+   <body>
+   	  <table>
+   	  		<tr>
+   	  			<div class="padleft">
+   	  				<label>
+   	  					<b><i>
+   	  					About {{ result.total }} results ({{ result.timeTaken }} seconds)
+   	  					</i></b>
+   	  				</label><br><br>
+   	  			</div>
+   	  		</tr>
+			{% for item in result.result %}
+			<tr>
+			  <div class="padleft">
+			  	{% if item.title is defined %}
+  					<label><b>{{ item.title }}</b></label><br>
+  				{% endif %}
+			  	{% if item.component is defined %}
+  					<label><b>{{ item.component }}</b></label><br>
+  				{% endif %}  				
+  				<a href="{{ item.link }}">{{ item.link }}</a> <br>  				
+				<div class="text ellipsis">
+				  {% if item.paragraph is defined %}
+				  	<span class="text-concat">{{ item.paragraph }}</span><br>
+				  {% endif %}
+				  {% if item.description is defined %}
+				  	<span class="text-concat">{{ item.description }}</span><br>
+				  {% endif %}
+				</div>  				
+  			  </div>
+  			 </tr>
+  			 <br> 	  				
+			{% endfor %}   	  
+	  </table>	
+   </body>
+</html>
